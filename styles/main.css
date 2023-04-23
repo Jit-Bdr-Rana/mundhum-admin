@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    
+
+    .bg-login{
+        background: rgb(181,74,11);
+background: linear-gradient(90deg, rgba(181,74,11,1) 50%, rgba(251,251,251,1) 50%);
+    }
+    .active-nav{
+        @apply border-l-gray-700 bg-gray-200 
+    }
+    .transition-custom{
+        transition:0.5s;
+    }
+    .swal-modal {
+       @apply border shadow-custom w-1/4
+      }
+    .swal-title {
+        margin: 0px;
+        padding:0px;
+        font-size: 16px;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.21);
+        margin-bottom: 0px;
+      }
+      .swal-text {
+       @apply text-lg text-gray-600   
+    }
+    .swal-text{
+        margin-top:0.8rem !important
+    }
+    .swal-footer {
+        margin-top:5px !important;
+        padding:5px;
+
+      }
+      .ant-table-cell{
+        @apply !px-2 !py-3
+      }
+      .ant-checkbox-input .ant-checkbox-checked{
+      @apply !accent-black hover:!border-gray-500 hover:!bg-red-500 hover:!outline-slate-800 !border-gray-700
+      }
+      .ant-table-row-selected .ant-table-cell{
+        @apply !bg-gray-200       }
+      .ant-checkbox-inner{
+        @apply !outline-gray-600 !outline-offset-8 hover:!border-2 hover:!border-gray-500 after:!bg-gray-500 after:hover:!border-gray-500 
+      }
+      .ant-table-cell-row-hover{
+       @apply !border-gray-600
+      }
+      .ant-btn-primary{
+        @apply !bg-gray-500 
+      }
+      
+      .ant-btn-link{
+        @apply  !text-black
+      }
+      .ant-input-affix-wrapper, .ant-table-filter-dropdown-search-input{
+        @apply !border-gray-500
+      }
+      .ant-dropdown-menu-item-selected{
+         @apply !bg-gray-200
+      }
+      .ant-checkbox{
+        @apply hover:!border-gray-500
+      }
+      .ant-select-dropdown{
+        @apply !rounded-sm !border !border-gray-500 !m-0 !p-0 
+      }
+      .ant-select-item{
+        @apply hover:!bg-gray-500 hover:!text-white  !rounded-none !p-1 !pl-3 
+      }
+      .ant-checkbox-checked .ant-checkbox-inner {
+        @apply !bg-gray-500 !border-gray-500
+      }
+      .ant-pagination-item a{
+       @apply !text-gray-500
+      }
+      .ant-dropdown-trigger, .ant-table-filter-trigger{
+        @apply !text-white;
+      }
+       .ant-pagination-item-active{
+         @apply  !border-gray-500 !border-2
+      }
+      .error > .ant-select-selector{
+        @apply !border !border-red-600
+      }
+     .ant-select-selector{
+        @apply rounded-none
+      }
+     .custom > .ant-select-selector{
+        @apply !border !border-gray-300 !text-gray-900 !text-sm !rounded-sm focus:!outline-none hover:!border-gray-500 focus:!ring-gray-500 focus:!border-gray-500 
+      }
+    
+      .swal-title{
+        @apply my-4 shadow-none
+      }
+      .ant-checkbox-wrapper:hover{
+        @apply  !outline-none !border-none
+      }
+      .swal-button--text{
+        @apply hover:!bg-gray-800 !bg-gray-500 !text-white px-3 py-0.5 text-xs
+      }
+      .swal-button-mode{
+        @apply bg-red-500 hover:bg-red-800 text-white px-3 py-0.5 text-xs      }
+        .ant-table-thead .ant-table-cell {
+         @apply !bg-gray-500 !p-3 !text-white 
+        }
+        .ant-input{
+           @apply !mr-3 !w-1/5  focus:!border  !bg-white  !px-3 !pr-2 !rounded-sm !text-xs focus:!outline-none
+        }
+        
+        @media print {
+          @page  
+          { 
+              size: 0ch;   /* auto is the initial value */ 
+          
+              /* this affects the margin in the printer settings */ 
+              margin: 2mm 2mm 2mm 2mm;  
+          } 
+          
+          body  
+          { 
+              /* this affects the margin on the content before sending to printer */ 
+              margin: 0px;  
+          } 
+          
+          .invoice{
+            zoom:75%;
+            -moz-transform: scale(7.5);
+          }
+          .page-break-inside{
+            page-break-inside: avoid;
+          }
+          .page-break-inside-avoid{
+            page-break-inside: avoid;
+          }
+          .page-break-before{
+            page-break-before: always;
+          }
+          .before-page-break{
+            page-break-before:always;
+          }
+        }
+
+        input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+     
+}
+
+@layer base{
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+}
+
+@layer utilities{
+    .direction-reverse{
+        animation-direction: reverse;
+    }
+    .swal-button {
+        @apply px-4 py-1.5 outline-none 
+      }
+      .swal-wide{
+        width:30% !important;
+    }
+  
+}
