@@ -20,10 +20,10 @@ const MainLayout = ({ title, children, moduleId }: { title: string, children: Re
             {global.user.isLoggedIn() ?
                 <div className="flex flex-wrap   w-full h-screen font-poppin ">
                     <Navbar collapse={collapse} setCollapse={setCollapse} />
-                    <div className="flex print:hidden overflow-hidden bg-white pt-[3.8rem]">
+                    <div className="flex print:hidden overflow-hidden pt-[3.8rem]">
                         <Sidebar collapse={collapse} />
                     </div>
-                    <div className={`print:w-full print:lg:ml-0 h-full transition-all duration-500 w-full animate-slow  relative px-1 py-1 ${collapse ? 'lg:ml-[5.3rem]' : 'lg:ml-[15rem]'}`}>
+                    <div className={`print:w-full  print:lg:ml-0 h-full transition-all duration-500 w-full animate-slow  relative px-1 py-1 ${collapse ? 'lg:ml-[5.3rem]' : 'lg:ml-[15rem]'}`}>
                         <div className=" rounded-sm px-1">
                             <ProtectedRoute moduleId={moduleId}>
                                 {children}

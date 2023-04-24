@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         //For Custom css structure
+        main:'#001528',
         mundhum:'#00aef0',
         primary: "#0c4a6e",
         secondary: "#134e4a",

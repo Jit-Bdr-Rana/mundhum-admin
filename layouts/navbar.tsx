@@ -6,6 +6,8 @@ import { MdClear } from "react-icons/md";
 import { CgProfile } from 'react-icons/cg';
 import { useGlobalContext } from '../contexts/GlobalContext';
 import Link from 'next/link';
+import { Avatar } from 'antd';
+import { BiUser } from 'react-icons/bi';
 const Navbar = ({ collapse, setCollapse }: { collapse: boolean, setCollapse: (set: boolean) => void }) => {
     const [time, setTime] = useState<Date>(new Date())
     const global = useGlobalContext();
@@ -31,8 +33,7 @@ const Navbar = ({ collapse, setCollapse }: { collapse: boolean, setCollapse: (se
                             <span className='font-bold'>  {time.toLocaleString('en-US', { hour: 'numeric', second: '2-digit', minute: 'numeric', hour12: true })}</span>
                             <IoMdLogOut onClick={() => global.logout()} title='logout' size={20} />
                             <IoSettings title='settings' className='animate-spin hover:animate-none  ' size={20} />
-                            <CgProfile className='' title='profile' size={20} />
-                            <span className='leading-4 text-center text-gray-600 text-xs'>
+                            <Avatar size={25} icon={<BiUser className='' title='profile' size={25} />} />                           <span className='leading-4 text-center text-gray-600 text-xs'>
                                 <Link href={'/user/profile'}>
                                     {global?.user?.getFullName() ?? ''}
                                 </Link>

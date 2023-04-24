@@ -40,49 +40,49 @@ background: linear-gradient(90deg, rgba(181,74,11,1) 50%, rgba(251,251,251,1) 50
         @apply !px-2 !py-3
       }
       .ant-checkbox-input .ant-checkbox-checked{
-      @apply !accent-black hover:!border-gray-500 hover:!bg-red-500 hover:!outline-slate-800 !border-gray-700
+      @apply !accent-black hover:!border-main hover:!bg-red-500 hover:!outline-slate-800 !border-gray-700
       }
       .ant-table-row-selected .ant-table-cell{
         @apply !bg-gray-200       }
       .ant-checkbox-inner{
-        @apply !outline-gray-600 !outline-offset-8 hover:!border-2 hover:!border-gray-500 after:!bg-gray-500 after:hover:!border-gray-500 
+        @apply !outline-gray-600 !outline-offset-8 hover:!border-2 hover:!border-main after:!bg-main after:hover:!border-main 
       }
       .ant-table-cell-row-hover{
        @apply !border-gray-600
       }
       .ant-btn-primary{
-        @apply !bg-gray-500 
+        @apply !bg-main 
       }
       
       .ant-btn-link{
         @apply  !text-black
       }
       .ant-input-affix-wrapper, .ant-table-filter-dropdown-search-input{
-        @apply !border-gray-500
+        @apply !border-main
       }
       .ant-dropdown-menu-item-selected{
          @apply !bg-gray-200
       }
       .ant-checkbox{
-        @apply hover:!border-gray-500
+        @apply hover:!border-main
       }
       .ant-select-dropdown{
-        @apply !rounded-sm !border !border-gray-500 !m-0 !p-0 
+        @apply !rounded-sm !border !border-main !m-0 !p-0 
       }
       .ant-select-item{
-        @apply hover:!bg-gray-500 hover:!text-white  !rounded-none !p-1 !pl-3 
+        @apply hover:!bg-main hover:!text-white  !rounded-none !p-1 !pl-3 
       }
       .ant-checkbox-checked .ant-checkbox-inner {
-        @apply !bg-gray-500 !border-gray-500
+        @apply !bg-main !border-main
       }
       .ant-pagination-item a{
-       @apply !text-gray-500
+       @apply !text-main
       }
       .ant-dropdown-trigger, .ant-table-filter-trigger{
         @apply !text-white;
       }
        .ant-pagination-item-active{
-         @apply  !border-gray-500 !border-2
+         @apply  !border-main !border-2
       }
       .error > .ant-select-selector{
         @apply !border !border-red-600
@@ -91,7 +91,7 @@ background: linear-gradient(90deg, rgba(181,74,11,1) 50%, rgba(251,251,251,1) 50
         @apply rounded-none
       }
      .custom > .ant-select-selector{
-        @apply !border !border-gray-300 !text-gray-900 !text-sm !rounded-sm focus:!outline-none hover:!border-gray-500 focus:!ring-gray-500 focus:!border-gray-500 
+        @apply !border !border-gray-300 !text-gray-900 !text-sm !rounded-sm focus:!outline-none hover:!border-main focus:!ring-main focus:!border-main 
       }
     
       .swal-title{
@@ -101,12 +101,12 @@ background: linear-gradient(90deg, rgba(181,74,11,1) 50%, rgba(251,251,251,1) 50
         @apply  !outline-none !border-none
       }
       .swal-button--text{
-        @apply hover:!bg-gray-800 !bg-gray-500 !text-white px-3 py-0.5 text-xs
+        @apply hover:!bg-gray-800 !bg-main !text-white px-3 py-0.5 text-xs
       }
       .swal-button-mode{
         @apply bg-red-500 hover:bg-red-800 text-white px-3 py-0.5 text-xs      }
         .ant-table-thead .ant-table-cell {
-         @apply !bg-gray-500 !p-3 !text-white 
+         @apply !bg-[#001528] !p-3 !text-white 
         }
         .ant-input{
            @apply !mr-3 !w-1/5  focus:!border  !bg-white  !px-3 !pr-2 !rounded-sm !text-xs focus:!outline-none
@@ -150,12 +150,21 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+.sidebar::-webkit-scrollbar {
+  width: 0px;
+}
 
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }
-     
+.ant-menu-item-selected {
+    @apply !bg-mundhum !text-white !mx-0  !rounded-none
+}
+ .ant-menu-item {
+  @apply hover:!bg-mundhum hover:!text-white hover:!mx-0  hover:!rounded-none
+
+ }    
 }
 
 @layer base{

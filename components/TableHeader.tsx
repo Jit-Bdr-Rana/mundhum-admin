@@ -28,11 +28,11 @@ const TableHeader = ({ showSearch, onSearch, showBackButton, showAddButton, show
                 />
             </div>
 
-            <button onClick={onBackButton} type="button" className={`${showBackButton ? '' : 'hidden'} bg-gray-600 hover:bg-gray-800 text-white rounded-md py-0.5 px-3 text-sm flex items-center gap-2`} ><span>Back</span> <TiArrowBack size={25} /></button>
+            <button onClick={onBackButton} type="button" className={`${showBackButton ? '' : 'hidden'} bg-main hover:bg-gray-800 text-white rounded-md py-0.5 px-3 text-sm flex items-center gap-2`} ><span>Back</span> <TiArrowBack size={25} /></button>
 
             {
                 showAddButton &&
-                <button onClick={onAddButton} type='button' title='addnew' className="bg-gray-600 hover:bg-gray-800 text-white rounded-md py-1.5 px-3 text-sm flex items-center gap-2">
+                <button onClick={onAddButton} type='button' title='addnew' className="bg-main hover:bg-gray-800 text-white rounded-md py-1.5 px-3 text-sm flex items-center gap-2">
                     <span className='ml-2' >{addButtonText ?? 'Add'}</span>
                     < MdAddToPhotos size={16} />
                 </button>
@@ -40,7 +40,7 @@ const TableHeader = ({ showSearch, onSearch, showBackButton, showAddButton, show
             {
                 showPrintButton &&
                 <div className="justify-self-end">
-                    <button onClick={onPrintButton} type="button" className='bg-gray-600 hover:bg-gray-800 text-white rounded-md py-1.5 px-3 text-sm flex items-center gap-2'><span className='mr-2'>Print</span> <Printer size={18} /></button>
+                    <button onClick={onPrintButton} type="button" className='bg-main hover:bg-gray-800 text-white rounded-md py-1.5 px-3 text-sm flex items-center gap-2'><span className='mr-2'>Print</span> <Printer size={18} /></button>
                 </div>
             }
         </div>

@@ -4,6 +4,9 @@ import { useGlobalContext } from '../contexts/GlobalContext';
 import { httpClient } from '../apis/rest.api';
 import { dashboardUrl } from '../apis/list.api';
 import { getIcon } from '../datas/dashboard.data';
+import { Avatar, Image } from 'antd';
+import { BiUser } from 'react-icons/bi';
+import { greet } from '../utils/greet';
 const dashboard = () => {
     return (
         <Fragment>
@@ -54,7 +57,19 @@ const Dashboard = () => {
         fetchStat();
     }, [])
     return (
-        <div className='py-5 animate-slow '>
+        <div className='py-5 mx-3 animate-slow '>
+            <div className=' mb-4 shadow-custom bg-slate-50 rounded-md p-2 flex items-center justify-between'>
+                <div className='flex items-center gap-2'>
+                    <Avatar size={50} icon={<BiUser className='' title='profile' size={50} />} />
+                    <span className='text-2xl font-bold tracking-tight '>
+                        {greet(global?.user?.getFullName())}
+                    </span>
+                </div>
+                <div>
+                    <Image preview={false} src='/icon/pie-chart.png' height={100} width={100} />
+                </div>
+            </div>
+
             <div className='grid-cols-4  grid justify-between gap-2'>
                 {
                     stat?.map((data, index) => {
