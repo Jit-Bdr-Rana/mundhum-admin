@@ -1,6 +1,5 @@
 import React from 'react';
-import { useBarcode } from 'react-barcodes';
-
+import { useBarcode } from 'next-barcode'
 function Barcode({ billNo }: { billNo?: string }) {
     const { inputRef } = useBarcode({
         value: billNo ?? '0',

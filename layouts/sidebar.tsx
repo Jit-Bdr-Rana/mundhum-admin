@@ -3,6 +3,37 @@ import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
 import Link from 'next/link';
 import { sidebarData } from '../datas/sidebar.data';
 import { useGlobalContext } from '../contexts/GlobalContext';
+import { Menu } from 'antd';
+import type { MenuProps } from 'antd'
+
+type MenuItem = Required<MenuProps>['items'][number];
+
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  type?: 'group',
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  } as MenuItem;
+}
+import {
+  AppstoreOutlined,
+  ContainerOutlined,
+  DesktopOutlined,
+  MailOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PieChartOutlined,
+} from '@ant-design/icons'
+import Logo from '../components/Logo';
+import { useRouter } from 'next/router';
 const Sidebar = ({ collapse }: { collapse: boolean }) => {
   const [activeNav, setActiveNav] = useState<number>(0);
   const global = useGlobalContext();
@@ -10,54 +41,45 @@ const Sidebar = ({ collapse }: { collapse: boolean }) => {
     sessionStorage.setItem('admin-nav', `${index}`);
     setActiveNav(index)
   }
+
+
+  const [selectedKeys, setSelectedKeys] = useState<string>('Dashboard')
+
+  const router = useRouter()
+  const onSelect = ({ key }: { key: string }) => {
+    console.log(key)
+    const menu: any = sidebarData.flatMap(f => f.children).find((c: any) => c?.key == key)
+    router.push(menu.url)
+  }
+
   useEffect(() => {
-    const current_nav: string | never | null = sessionStorage.getItem("admin-nav")
-    if (current_nav != null || current_nav === '') {
-      setActiveNav(parseInt(current_nav))
+    const menu: any = sidebarData.find((item: any) => (item.url === router.pathname))
+    if (menu) {
+      setSelectedKeys(menu?.key as string)
+    } else {
+      setSelectedKeys('')
     }
-  }, [])
+  }, [router])
+
   return (
-    <aside className={`fixed print:static print:border-none print:w-0 print:hidden  hidden border-r shadow-custom border-gray-200  z-40 h-full top-0 left-0  lg:flex flex-shrink-0 flex-col ${collapse ? 'w-[3.5rem]  pt-[m] ' : ' w-[15rem] '} transition-all duration-500  bg-white `}>
+    <aside className={`fixed print:static bg-[#001528] print:border-none print:w-0 print:hidden  hidden border-r shadow-custom border-gray-200  z-40 h-full top-0 left-0  lg:flex flex-shrink-0 flex-col ${collapse ? 'w-[5.3rem]  pt-[m] ' : ' w-[15rem] '} transition-all duration-500  `}>
       <div className="relative mt-2 print:hidden flex-1 flex flex-col  overflow-y-auto">
         <div className={`text-xl   font-bold flex items-center py-[1rem] px-1  `}>
-          <img src="/delivery-man.png" className='' alt="" />
+          {!collapse && <Logo />}
           <div className={`font-bold text-orange-500 ${collapse && 'hidden'}`}>
-            <span className='block'>Ideal Courior</span>
-            <span className='text-idealColor block text-center'> Admin</span>
           </div>
         </div>
-        <div className="  flex flex-col   ">
-          <div className="flex-1  divide-y space-y-1 ">
-            <ul className="space-y-1 pb-2 font-bold text-xs">
-              {
-                sidebarData.map((content, index) => {
-                  return (
-                    <React.Fragment key={index}>
-                      {
-                        global.user.isModuleAllowed(content.id) &&
-                        <li key={index}>
-                          {
-                            content.isSubtitle === false ?
+        <Menu
+          activeKey={selectedKeys}
+          selectedKeys={[selectedKeys]}
+          mode="inline"
+          className='overflow-hidden'
+          theme="dark"
+          inlineCollapsed={collapse}
+          items={sidebarData}
+          onSelect={onSelect}
 
-                              <Link href={content.url as string}>
-                                <a onClick={() => handleNav(index)} className={`${activeNav === index ? 'active-nav' : 'border-white'}   border-b-2 border-b-transparent hover:bg-gray-200 hover:border-l-4 border-l-4  hover:border-l-gray-700 text-gray-900 font-normal rounded-l-sm flex items-center py-1.5 px-4 group`}>
-                                  {content.icon}
-                                  <span className={`ml-3 font-bold ${collapse && 'hidden'}`}>{content.title}</span>
-                                </a>
-                              </Link>
-                              :
-                              <Drawer collapse={collapse} content={content} setActiveNav={handleNav} activeNav={activeNav} parentNav={index} />
-                            // <Draw />
-                          }
-                        </li>
-                      }
-                    </React.Fragment>
-                  )
-                })
-              }
-            </ul>
-          </div>
-        </div>
+        />
 
       </div>
       {

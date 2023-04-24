@@ -6,60 +6,55 @@ import { AiFillDingtalkCircle, AiFillDashboard } from "react-icons/ai";
 import { ImOffice } from "react-icons/im";
 import { RiDraftLine } from "react-icons/ri";
 import { HiUsers } from "react-icons/hi";
-export interface Sidebar {
-  id?: number | Array<number> | undefined;
-  title: string;
-  url?: string;
-  icon: React.ReactNode;
-  isSubtitle: boolean;
-  subTitle?: {
-    id?: number;
-    title: string;
-    url: string;
-    icon: React.ReactNode;
-  }[];
-}
-export const sidebarData: Sidebar[] = [
+
+export const sidebarData: any = [
   {
-    title: "Dashboard",
+    id: [0, 0],
+    key: 'dashboard',
+    label: "Dashboard",
     url: "/dashboard",
     icon: <AiFillDashboard size={20} />,
-    isSubtitle: false,
   },
   {
-    id: [1, 2, 3,6],
-    title: "Shipment",
+    id: [1, 2, 3, 6],
+    key: 'shipment',
+    label: "Shipment",
     url: "/shipment",
     icon: <FaShippingFast size={20} />,
-    isSubtitle: true,
-    subTitle: [
+    isSublabel: true,
+    children: [
       {
         id: 1,
-        title: "View",
+        key: 'shipment-view',
+        label: "View",
         url: "/shipment",
         icon: <MdRemoveRedEye size={20} />,
       },
       {
         id: 1,
-        title: "Draft",
+        key: 'shipment-draft',
+        label: "Draft",
         url: "/shipment/draft",
         icon: <RiDraftLine size={20} />,
       },
       {
         id: 2,
-        title: "Carrier",
+        key: 'shipment-carrier',
+        label: "Carrier",
         url: "/shipment/carrier",
         icon: <AiFillDingtalkCircle size={20} />,
       },
       {
         id: 3,
-        title: "Payment",
+        key: 'shipment-paymnet',
+        label: "Payment",
         url: "/shipment/payment",
         icon: <MdPayment size={20} />,
       },
       {
         id: 6,
-        title: "Shipment Status",
+        key: 'shipment-status',
+        label: "Shipment Status",
         url: "/shipment/status",
         icon: <BsStopwatch size={20} />,
       },
@@ -67,34 +62,39 @@ export const sidebarData: Sidebar[] = [
   },
   {
     id: 4,
-    title: "Branch",
+    key: 'branch',
+    label: "Branch",
     url: "/branch",
     icon: <ImOffice size={20} />,
-    isSubtitle: false,
+    isSublabel: false,
   },
   {
     id: 5,
-    title: "Gallery",
+    key: 'gallery',
+    label: "Gallery",
     url: "/gallery",
     icon: <BsCardImage size={20} />,
-    isSubtitle: false,
+    isSublabel: false,
   },
 
   {
     id: [7, 8],
-    title: "User Management",
+    key: 'user-managemnt',
+    label: "User Management",
     icon: <FaUsersCog size={23} />,
-    isSubtitle: true,
-    subTitle: [
+    isSublabel: true,
+    children: [
       {
         id: 7,
-        title: "User",
+        key: 'user',
+        label: "User",
         url: "/user",
         icon: <HiUsers size={20} />,
       },
       {
         id: 8,
-        title: "Role",
+        key: 'role',
+        label: "Role",
         url: "/user/role",
         icon: <FaUserClock size={20} />,
       },
@@ -103,16 +103,18 @@ export const sidebarData: Sidebar[] = [
   },
   {
     id: 9,
-    title: "Customer Feedback",
+    key: 'customer-feedback',
+    label: "Customer Feedback",
     url: "/user-feedback",
     icon: <MdOutlineFeedback size={20} />,
-    isSubtitle: false,
+    isSublabel: false,
   },
   {
     id: 15,
-    title: "Test Page",
+    key: 'test',
+    label: "Test Page",
     url: "/test",
     icon: <GrTest size={20} />,
-    isSubtitle: false,
+    isSublabel: false,
   },
 ];
