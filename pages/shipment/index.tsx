@@ -24,7 +24,6 @@ export default index
 
 export const Shipment = () => {
     const [action, setAction] = useState<Action>(Action.index);
-    const [statusList, setStatusList] = useState<StatusForm[]>([]);
     const [shipmentList, setShipmentList] = useState<Array<any>>([]);
     const [filteredShipmentList, setFilteredShipmentList] = useState<Array<any>>([]);
     const [editData, setEditData] = useState<ShipmentForm>();
@@ -34,21 +33,21 @@ export const Shipment = () => {
     const [massSelection, setMassSelection] = useState<boolean>(false)
     const [selectedRow, setSelectedRow] = useState<number[]>([]);
     const [selectedKeys, setSelectedKeys] = useState<Key[]>([]);
+    const [carrierList, setCarrierList] = useState<any[]>([]);
+    const [destinationList, setDestinationList] = useState<any[]>([]);
     const fetchAllShipment = async () => {
         const { data, error } = await httpClient().get(shipmentUrl.getallUsingFilter + 0);
         if (data && !error) {
-            setShipmentList(data.data);
-            setFilteredShipmentList(data.data);
+
+            setShipmentList(data.data['shipments']);
+            setFilteredShipmentList(data.data['shipments']);
+            setDestinationList(data.data['desinationList'])
+            setCarrierList(data.data['carriers'])
         }
         setLoading(false)
     }
 
-    const fetchAllStatus = async () => {
-        const { data, error } = await httpClient().get(statusUrl.getall);
-        if (data && !error) {
-            setStatusList(data.data as StatusForm[]);
-        }
-    }
+
 
     const deleteShipment = (dltData: ShipmentForm) => {
 
@@ -83,7 +82,6 @@ export const Shipment = () => {
 
     useEffect(() => {
         fetchAllShipment();
-        fetchAllStatus();
     }, [])
 
 
@@ -168,7 +166,8 @@ export const Shipment = () => {
                     setEditData={setEditData}
                     selectedKeys={selectedKeys}
                     setSelectedKeys={setSelectedKeys}
-
+                    carrierList={carrierList}
+                    destinationList={destinationList}
                 />
                 {
                     action === Action.printModel &&
@@ -185,7 +184,7 @@ export const Shipment = () => {
 
                 {(action === Action.edit || action === Action.add || action === Action.copy) && <Form setShipmentList={setFilteredShipmentList} fetchAllShipment={fetchAllShipment} editData={editData} action={action} setAction={setAction} />}
 
-                {action === Action.quickedit && <ShipmentStatus clearSelect={clearSelect} massSelection={massSelection} selectedRow={selectedRow} editData={editData} statusList={statusList} />}
+                {action === Action.quickedit && <ShipmentStatus clearSelect={clearSelect} massSelection={massSelection} selectedRow={selectedRow} editData={editData} />}
             </div>
         </Container>
 

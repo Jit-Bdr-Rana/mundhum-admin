@@ -65,7 +65,7 @@ class HttpClient {
 
   axios() {
     const request = axios.create({
-      baseURL: process.env.BACKEND_URL || 'https://api.idealcourier.com.np/api/',
+      baseURL: process.env.BACKEND_URL || 'http://127.0.0.1:8000/api',
     });
 
     request.interceptors.request.use(
@@ -125,7 +125,7 @@ const httpClient = (): HttpClient => {
 const httpOnly = (): AxiosInstance => {
   const plainAxios: AxiosInstance = axios.create({
     // baseURL: "http://localhost:2200/",
-    baseURL: process.env.BACKEND_URL || 'https://api.idealcourier.com.np/api/',
+    baseURL: process.env.BACKEND_URL || 'http://127.0.0.1:8000/api',
     timeout: 1000,
   });
   plainAxios.interceptors.request.use(

@@ -4,50 +4,55 @@ import { Controller, useForm } from "react-hook-form";
 import { BiHistory } from "react-icons/bi";
 import { BsHourglassSplit } from "react-icons/bs";
 import { IoClose, IoSave } from "react-icons/io5";
-import { shipmentStatusUrl } from "../../apis/list.api";
+import { shipmentStatusUrl, statusUrl } from "../../apis/list.api";
 import { httpClient } from "../../apis/rest.api";
 import { domesticCity } from "../../datas/shipment.data";
 import { ShipmentForm, ShipmentStatusForm, StatusForm } from "../../interface/form";
 import { notification } from "../../utils/tost";
 import ButtonGroup from "../ButtonGroup";
-interface Props{
-    statusList: StatusForm[];
+interface Props {
     editData?: ShipmentForm;
     className?: string;
-    massSelection:boolean;
-    selectedRow:number[];
-    clearSelect:()=>void
+    massSelection: boolean;
+    selectedRow: number[];
+    clearSelect: () => void
 }
 
 
-const ShipmentStatus = ({ statusList, editData,massSelection,selectedRow,clearSelect}:Props) => {
+const ShipmentStatus = ({ editData, massSelection, selectedRow, clearSelect }: Props) => {
     const { register, handleSubmit, setValue, reset, watch, control, formState: { errors } } = useForm<ShipmentStatusForm>({
         defaultValues: { shipmentId: editData?.id }
     });
     const [shipmentStatusList, setShipmentStatus] = useState<any[]>([]);
     const [statusEdit, setStatusEdit] = useState<boolean>(false);
+    const [statusList, setStatusList] = useState<StatusForm[]>([]);
     const saveForm = async (formData: ShipmentStatusForm) => {
         if (formData.id) {
             const { data, error } = await httpClient().put(shipmentStatusUrl.update + formData.id, formData);
             setFormState(data, error, true);
         } else {
-            if(massSelection &&selectedRow &&selectedRow?.length>0){
-                const payload={
+            if (massSelection && selectedRow && selectedRow?.length > 0) {
+                const payload = {
                     ...formData,
-                    shipmentId:selectedRow
+                    shipmentId: selectedRow
                 }
                 const { data, error } = await httpClient().post(shipmentStatusUrl?.massUpdate, payload);
                 setFormState(data, error, false);
                 clearSelect();
-                
-            }else{
+
+            } else {
                 const { data, error } = await httpClient().post(shipmentStatusUrl.save, formData);
                 setFormState(data, error, false);
             }
-       
+
         }
     }
-
+    const fetchAllStatus = async () => {
+        const { data, error } = await httpClient().get(statusUrl.getall);
+        if (data && !error) {
+            setStatusList(data.data as StatusForm[]);
+        }
+    }
     const setFormState = (data: any, error: any, edit: boolean) => {
         if (data && !error) {
             notification.success(data?.message ?? edit ? 'data has been updated successfully' : 'data has been created successfully')
@@ -95,6 +100,9 @@ const ShipmentStatus = ({ statusList, editData,massSelection,selectedRow,clearSe
             setValue('shipmentId', editData?.id)
         }
     }, [editData])
+    useEffect(() => {
+        fetchAllStatus()
+    }, [])
     const { Option } = Select
 
     return (
@@ -103,10 +111,10 @@ const ShipmentStatus = ({ statusList, editData,massSelection,selectedRow,clearSe
                 <div className='text-center flex flex-row-reverse bg-slate-600 text-white py-1.5 text-xl font-bold font-poppin'>
                     <div className='pr-2 w-full flex items-center justify-center'>
                         <span className='p-1.5'>{
-                            massSelection?
-                              <span>Total Selected Row:{selectedRow?.length||0}</span>
-                            :
-                            <span>Bill No:{editData?.billNo}</span>
+                            massSelection ?
+                                <span>Total Selected Row:{selectedRow?.length || 0}</span>
+                                :
+                                <span>Bill No:{editData?.billNo}</span>
                         }</span>
                         {statusEdit && <span onClick={() => { setStatusEdit(false); reset() }} className='hover:bg-black hover:bg-opacity-20  rounded-full p-1.5 cursor-pointer '><IoClose size={19} /></span>}
                     </div>
@@ -171,7 +179,7 @@ const ShipmentStatus = ({ statusList, editData,massSelection,selectedRow,clearSe
                                         placeholder="select the status"
                                         showSearch
                                         ref={ref}
-                                        className={`${errors?.statusId?'error':'custom'} w-full `}
+                                        className={`${errors?.statusId ? 'error' : 'custom'} w-full `}
                                         onChange={onChange}
                                         onBlur={onBlur}
                                         optionFilterProp="value"
@@ -206,80 +214,80 @@ const ShipmentStatus = ({ statusList, editData,massSelection,selectedRow,clearSe
                     </div>
                 </form>
             </div>
-           {
-            !massSelection &&
-            <div className="relative overflow-x-auto shadow-custom p-3 animate-slow  ">
-            <p className='flex gap-3  items-center text-gray-900 text-base font-bold underline mb-3'><span>History</span> <BiHistory size={20} /></p>
-            <table className="w-full text-sm text-left text-white bg-slate-50 dark:text-gray-400">
-                <thead className="text-xs text-white font-bold uppercase bg-slate-600">
-                    <tr>
-                        <th scope="col" className="px-6 py-3">
-                            Sn
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            status
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            location
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Date
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Time
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            <span className="">Actions</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        shipmentStatusList?.length > 0 ? shipmentStatusList.map((data, index) => {
-                            return (
-                                <tr key={index} className="border-b text-gray-500 odd:bg-white even:bg-gray-50 ">
-                                    <th scope="row" className="px-6 py-2 ">
-                                        {index + 1}
-                                    </th>
-                                    <th scope="row" className="px-6 py-2 text-gray-800 whitespace-nowrap">
-                                        {data?.name?.name}
-                                    </th>
-                                    <td className="px-6 py-2">
-                                        {data?.location}
-                                    </td>
-                                    <td className="px-6 py-2">
-                                        {data?.date}
-                                    </td>
-                                    <td className="px-6 py-2">
-                                        {data?.time}
-                                    </td>
-
-                                    <td className="px-6 py-2 flex ">
-                                        <ButtonGroup
-                                            edit={true}
-                                            onEdit={() => {
-                                                editStatusform(data)
-                                            }}
-                                            dlt={true}
-                                            onDelete={() => {
-                                                deleteShipmentStatus(data)
-                                            }}
-
-                                        />
-                                    </td>
-                                </tr>
-                            )
-                        }) :
-                            <tr className="border-b text-gray-500 odd:bg-white even:bg-gray-50 ">
-                                <td colSpan={6} className='text-center py-2'>No record found</td>
+            {
+                !massSelection &&
+                <div className="relative overflow-x-auto shadow-custom p-3 animate-slow  ">
+                    <p className='flex gap-3  items-center text-gray-900 text-base font-bold underline mb-3'><span>History</span> <BiHistory size={20} /></p>
+                    <table className="w-full text-sm text-left text-white bg-slate-50 dark:text-gray-400">
+                        <thead className="text-xs text-white font-bold uppercase bg-slate-600">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Sn
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    status
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    location
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Date
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Time
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    <span className="">Actions</span>
+                                </th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                shipmentStatusList?.length > 0 ? shipmentStatusList.map((data, index) => {
+                                    return (
+                                        <tr key={index} className="border-b text-gray-500 odd:bg-white even:bg-gray-50 ">
+                                            <th scope="row" className="px-6 py-2 ">
+                                                {index + 1}
+                                            </th>
+                                            <th scope="row" className="px-6 py-2 text-gray-800 whitespace-nowrap">
+                                                {data?.name?.name}
+                                            </th>
+                                            <td className="px-6 py-2">
+                                                {data?.location}
+                                            </td>
+                                            <td className="px-6 py-2">
+                                                {data?.date}
+                                            </td>
+                                            <td className="px-6 py-2">
+                                                {data?.time}
+                                            </td>
 
-                    }
+                                            <td className="px-6 py-2 flex ">
+                                                <ButtonGroup
+                                                    edit={true}
+                                                    onEdit={() => {
+                                                        editStatusform(data)
+                                                    }}
+                                                    dlt={true}
+                                                    onDelete={() => {
+                                                        deleteShipmentStatus(data)
+                                                    }}
 
-                </tbody>
-            </table>
-        </div>
-           }
+                                                />
+                                            </td>
+                                        </tr>
+                                    )
+                                }) :
+                                    <tr className="border-b text-gray-500 odd:bg-white even:bg-gray-50 ">
+                                        <td colSpan={6} className='text-center py-2'>No record found</td>
+                                    </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            }
         </React.Fragment>
     )
 }

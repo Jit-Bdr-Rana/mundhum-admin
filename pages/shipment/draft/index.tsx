@@ -26,12 +26,16 @@ export const Shipment = () => {
     const [title, setTitle] = useState<string>('Shipment Table');
     const [filteredShipmentList, setFilteredShipmentList] = useState<Array<any>>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [carrierList, setCarrierList] = useState<any[]>([]);
+    const [destinationList, setDestinationList] = useState<any[]>([]);
     const fetchAllShipment = async () => {
         setLoading(true)
         const { data, error } = await httpClient().get(shipmentUrl.getallUsingFilter + 1);
         if (data && !error) {
-            setShipmentList(data?.data);
-            setFilteredShipmentList(data?.data);
+            setShipmentList(data?.data['shipments']);
+            setFilteredShipmentList(data?.data['shipments']);
+            setDestinationList(data?.data['desinationList'])
+            setCarrierList(data?.data['carriers'])
         }
         setLoading(false);
     }
@@ -82,8 +86,12 @@ export const Shipment = () => {
                     onBackButton={() => setAction(Action.index)}
                     onSearch={(e: ChangeEvent<HTMLInputElement>) => filterShipment(e.target.value)}
                 />
-                <ShipmentTable isDraft={true} className={` ${!(action === Action.index) ? 'hidden' : ''} `} loading={loading} data={filteredShipmentList} deleteShipment={deleteShipment} setAction={setAction} setEditData={setEditData} />
-                <Form setShipmentList={setShipmentList} fetchAllShipment={fetchAllShipment} editData={editData} className={!(action === Action.edit || action === Action.add) ? 'hidden' : ''} action={action} setAction={setAction} />
+                <ShipmentTable destinationList={destinationList} carrierList={carrierList} isDraft={true} className={` ${!(action === Action.index) ? 'hidden' : ''} `} loading={loading} data={filteredShipmentList} deleteShipment={deleteShipment} setAction={setAction} setEditData={setEditData} />
+                {
+                    (action === Action.edit || action === Action.add) &&
+                    <Form setShipmentList={setShipmentList} fetchAllShipment={fetchAllShipment} editData={editData} action={action} setAction={setAction} />
+
+                }
             </div>
         </Container>
 

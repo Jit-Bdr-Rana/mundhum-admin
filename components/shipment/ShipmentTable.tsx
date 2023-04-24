@@ -30,12 +30,12 @@ interface Props {
     setMassSelection?: Dispatch<SetStateAction<boolean>>
     massSelection?: boolean,
     selectedKeys?: Key[]
-    selectedRow?: number[]
+    selectedRow?: number[],
+    carrierList: any[],
+    destinationList: any[]
 }
-const ShipmentTable = ({ data, setSelectedKeys, selectedKeys, setAction, setEditData, deleteShipment, loading, className, selectedRow, isDraft, massSelection, setMassSelection, setSelectedRow }: Props) => {
+const ShipmentTable = ({ carrierList, destinationList, data, setSelectedKeys, selectedKeys, setAction, setEditData, deleteShipment, loading, className, selectedRow, isDraft, massSelection, setMassSelection, setSelectedRow }: Props) => {
     const [filteredInfo, setFilteredInfo] = useState<Record<string, FilterValue | null>>({});
-    const [carrierList, setCarrierList] = useState<any[]>([]);
-    const [destinationList, setDestinationList] = useState<any[]>([]);
 
     const handleChange: TableProps<DataType>['onChange'] = (_, filters) => {
         setFilteredInfo(filters);
@@ -202,22 +202,6 @@ const ShipmentTable = ({ data, setSelectedKeys, selectedKeys, setAction, setEdit
             width: '8%'
         },
     ];
-    const getAllCarrier = useCallback(async () => {
-        const { data, error } = await httpClient().get(carrierUrl.getall)
-        if (data && !error) {
-            setCarrierList(data?.data);
-        }
-    }, []);
-    const getDestinationList = useCallback(async () => {
-        const { data, error } = await httpClient().get(shipmentUrl.destinationList)
-        if (data && !error) {
-            setDestinationList(data?.data);
-        }
-    }, [])
-    useEffect(() => {
-        getAllCarrier();
-        getDestinationList();
-    }, [])
     return (
         <div className={`relative select-none overflow-x-auto shadow-custom p-3 animate-slow  ${className} `}>
             <Table columns={columns} dataSource={data?.map((m, i) => { return { ...m, key: i } })}
