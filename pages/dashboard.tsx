@@ -3,10 +3,11 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useGlobalContext } from '../contexts/GlobalContext';
 import { httpClient } from '../apis/rest.api';
 import { dashboardUrl } from '../apis/list.api';
-import { getIcon } from '../datas/dashboard.data';
+import { ModifiyIcon, getIcon } from '../datas/dashboard.data';
 import { Avatar, Image } from 'antd';
 import { BiUser } from 'react-icons/bi';
 import { greet } from '../utils/greet';
+import { FaShippingFast } from 'react-icons/fa';
 const dashboard = () => {
     return (
         <Fragment>
@@ -58,9 +59,9 @@ const Dashboard = () => {
     }, [])
     return (
         <div className='py-5 mx-3 animate-slow '>
-            <div className=' mb-4 shadow-custom bg-slate-50 rounded-md p-2 flex items-center justify-between'>
-                <div className='flex items-center gap-2'>
-                    <Avatar size={50} icon={<BiUser className='' title='profile' size={50} />} />
+            <div className=' mb-4 shadow-custom bg-main  text-white rounded-md p-2 px-5 flex items-center justify-between'>
+                <div className='flex items-center gap-4'>
+                    <Avatar size={50} className='bg-white' icon={<BiUser className='text-main ' title='profile' size={50} />} />
                     <span className='text-2xl font-bold tracking-tight '>
                         {greet(global?.user?.getFullName())}
                     </span>
@@ -74,13 +75,14 @@ const Dashboard = () => {
                 {
                     stat?.map((data, index) => {
                         // let random = getRandomIndex();
+                        let Icon = ModifiyIcon(FaShippingFast, 30)
                         return (
-                            <div key={index} className={`${global.user.isModuleAllowed(data?.id) ? 'block' : 'hidden'}  shadow-custom  p-6 max-w-sm   rounded-md border  flex justify-between items-center`}>
-                                <div className='w-full'>
+                            <div key={index} className={`bg-main bg-opacity-90 text-white ${global.user.isModuleAllowed(data?.id) ? 'block' : 'hidden'}  shadow-custom  p-6 max-w-sm   rounded-md border  flex justify-between items-center`}>
+                                <div className='w-full '>
 
                                     <h5 className="mb-3 text-xl font-bold tracking-tight ">{data?.name}</h5>
                                     <div className='flex justify-between items-center w-full'>
-                                        <span className="font-normal ">{getIcon(data?.id)}</span>
+                                        <span className="font-normal text-xl ">{<Icon />}</span>
                                         <span className=" text-xl ">{data?.count}</span>
                                     </div>
                                 </div>

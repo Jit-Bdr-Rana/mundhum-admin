@@ -51,3 +51,9 @@ const dashboardIcon: DashbordIcon[] = [
 export const getIcon = (id: number): React.ReactNode => {
     return dashboardIcon.find((curr: DashbordIcon) => curr.id === id)?.icon
 }
+
+export const ModifiyIcon = (Icon: any, size: number) => {
+    return function Modify({ ...props }) {
+        return <Icon size={size} {...props} />
+    }
+}
