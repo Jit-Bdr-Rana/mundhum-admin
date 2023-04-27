@@ -136,7 +136,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       page: '/shipment',
-      title: 'Ideal | Status ',
+      title: 'Mundhum | Status ',
       moduleId: modeuleList.statusModule.id
     }
   }

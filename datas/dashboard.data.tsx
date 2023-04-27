@@ -52,7 +52,7 @@ export const getIcon = (id: number): React.ReactNode => {
     return dashboardIcon.find((curr: DashbordIcon) => curr.id === id)?.icon
 }
 
-export const ModifiyIcon = (Icon: any, size: number) => {
+export const ModifiyIcon = (Icon: any, size=25) => {
     return function Modify({ ...props }) {
         return <Icon size={size} {...props} />
     }

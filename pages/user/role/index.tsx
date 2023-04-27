@@ -270,7 +270,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       page: '/user',
-      title: 'ideal | User Role',
+      title: 'Mundhum | User Role',
       moduleId: modeuleList?.roleModule.id
     }
   }

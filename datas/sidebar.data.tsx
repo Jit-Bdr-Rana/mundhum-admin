@@ -1,5 +1,5 @@
 import { MdRemoveRedEye, MdOutlineFeedback, MdPayment } from "react-icons/md";
-import { BsStopwatch, BsCardImage } from "react-icons/bs";
+import { BsStopwatch, BsCardImage, BsChatRightQuoteFill } from "react-icons/bs";
 import { FaUsersCog, FaUserClock, FaShippingFast } from "react-icons/fa";
 import { GrTest } from "react-icons/gr";
 import { AiFillDingtalkCircle, AiFillDashboard } from "react-icons/ai";
@@ -115,6 +115,14 @@ export const sidebarData: any = [
     label: "Test Page",
     url: "/test",
     icon: <GrTest size={20} />,
+    isSublabel: false,
+  },
+  {
+    id: 10,
+    key: 'quote',
+    label: "Customer Quote",
+    url: "/quote",
+    icon: <BsChatRightQuoteFill size={20} />,
     isSublabel: false,
   },
 ];

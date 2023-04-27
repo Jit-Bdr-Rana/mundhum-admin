@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
         props: {
             page: '/user-create',
-            title: 'Create User',
+            title: 'Mundhum |Create User',
             moduleId: modeuleList?.userModule.id
         }
     }

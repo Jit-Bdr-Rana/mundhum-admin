@@ -41,7 +41,7 @@ export const Shipment = () => {
 
             setShipmentList(data.data['shipments']);
             setFilteredShipmentList(data.data['shipments']);
-            setDestinationList(data.data['desinationList'])
+            setDestinationList(data.data['c'])
             setCarrierList(data.data['carriers'])
         }
         setLoading(false)
@@ -197,7 +197,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
         props: {
             page: '/shipment',
-            title: 'Ideal | Shipment ',
+            title: 'Mundhum | Shipment ',
             moduleId: modeuleList.shipmentModule.id
         }
     }

@@ -208,7 +208,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
         props: {
             page: '/user',
-            title: 'Ideal | Carrier',
+            title: 'Mundhum | Carrier',
             moduleId: modeuleList?.carrierModule.id
         }
     }

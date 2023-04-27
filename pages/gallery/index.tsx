@@ -201,7 +201,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
         props: {
             page: '/shipment',
-            title: 'ideal | gallery ',
+            title: 'Mundhum | gallery ',
             moduleId: modeuleList?.galleryModule.id
         }
     }

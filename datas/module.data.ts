@@ -34,6 +34,10 @@ const modeuleList:{[key:string]:{id:number,name:string}}= {
   feedbackModule:  {
     id: 9,
     name: "customer feedback module",
+  },
+  quoteModule:  {
+    id: 10,
+    name: "customer Quote",
   }
 
 }

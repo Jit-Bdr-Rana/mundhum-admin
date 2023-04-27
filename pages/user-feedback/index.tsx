@@ -130,7 +130,7 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
         props: {
             page: '/user-feedback',
-            title: 'Ideal | UserFeedback',
+            title: 'Mundhum | UserFeedback',
             moduleId: modeuleList?.feedbackModule.id
         }
     }

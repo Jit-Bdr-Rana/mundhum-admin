@@ -75,14 +75,13 @@ const Dashboard = () => {
                 {
                     stat?.map((data, index) => {
                         // let random = getRandomIndex();
-                        let Icon = ModifiyIcon(FaShippingFast, 30)
                         return (
                             <div key={index} className={`bg-main bg-opacity-90 text-white ${global.user.isModuleAllowed(data?.id) ? 'block' : 'hidden'}  shadow-custom  p-6 max-w-sm   rounded-md border  flex justify-between items-center`}>
                                 <div className='w-full '>
 
                                     <h5 className="mb-3 text-xl font-bold tracking-tight ">{data?.name}</h5>
                                     <div className='flex justify-between items-center w-full'>
-                                        <span className="font-normal text-xl ">{<Icon />}</span>
+                                        <span className="font-normal text-xl ">{getIcon(data?.id)}</span>
                                         <span className=" text-xl ">{data?.count}</span>
                                     </div>
                                 </div>

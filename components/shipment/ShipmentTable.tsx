@@ -5,8 +5,6 @@ import { DateFormat } from '../../utils/date';
 import { Action } from '../../interface/common';
 import truncate from '../../utils/truncate';
 import { FilterValue, TableRowSelection } from 'antd/lib/table/interface';
-import { httpClient } from '../../apis/rest.api';
-import { carrierUrl, shipmentUrl } from '../../apis/list.api';
 import { TableProps } from 'antd/lib/table/InternalTable';
 import ButtonGroup from '../ButtonGroup';
 interface DataType {

@@ -15,7 +15,7 @@ const MainLayout = ({ title, children, moduleId }: { title: string, children: Re
             <Head>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>{title ? title : 'Ideal courier | '}</title>
+                <title>{title ? title : 'Mundhum  | '}</title>
             </Head>
             {global.user.isLoggedIn() ?
                 <div className="flex flex-wrap   w-full h-screen font-poppin ">

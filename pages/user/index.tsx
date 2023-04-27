@@ -181,7 +181,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
         props: {
             page: '/user',
-            title: 'Ideal | User',
+            title: 'Mundhum | User',
             moduleId: modeuleList?.userModule?.id
         }
     }
